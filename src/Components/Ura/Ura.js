@@ -190,21 +190,28 @@ function Ura(props) {
     }
 
     // ---------------------------------------------------------------------
+
+
+    const ramaisValidos = [
+      // COMERCIAL
+      "4001","4002","4003","4004","4005","4006",
+
+      // SUCESSO
+      "8002","8003","8005","1038","3001",
+
+      // SUPORTE
+      "1020","1021","1022","1023",
+
+      // ATENDIMENTO
+      "3001","3002","3003","3004","3005","3006","3007","3008","3009",
+      "1044","1064","1065"
+    ];
     
-    const atendentes = logados.filter(
-      function(value) {
-        return value.exten === "1000" && value.device_status === "registered"|| value.exten === "1001" && value.device_status === "registered"|| value.exten === "1002" && value.device_status === "registered" || value.exten === "1003" && value.device_status === "registered"
-      || value.exten === "1004" && value.device_status === "registered"|| value.exten === "1005" && value.device_status === "registered" 
-      || value.exten === "1007" && value.device_status === "registered"|| value.exten === "1008" && value.device_status === "registered" || value.exten === "1009" && value.device_status === "registered"
-      || value.exten === "1020" && value.device_status === "registered"|| value.exten === "1021" && value.device_status === "registered" || value.exten === "1022" && value.device_status === "registered"
-      || value.exten === "1023" && value.device_status === "registered"|| value.exten === "1066" && value.device_status === "registered" || value.exten === "3001" && value.device_status === "registered" 
-      || value.exten === "3002" && value.device_status === "registered" || value.exten === "3003" && value.device_status === "registered" || value.exten === "3004" && value.device_status === "registered"
-      || value.exten === "3005" && value.device_status === "registered"  || value.exten === "3006" && value.device_status === "registered" || value.exten === "3007" && value.device_status === "registered" 
-      || value.exten === "3008" && value.device_status === "registered" || value.exten === "3009" && value.device_status === "registered" || value.exten === "3010" && value.device_status === "registered" 
-      || value.exten === "3011" && value.device_status === "registered" || value.exten === "1015" && value.device_status === "registered" || value.exten === "1016" && value.device_status === "registered" 
-      || value.exten === "1018" && value.device_status === "registered" || value.exten === "1019" && value.device_status === "registered" || value.exten === "1051" && value.device_status === "registered"
-      || value.exten === "4006" && value.device_status === "registered" || value.exten === "4005" && value.device_status === "registered" || value.exten === "4004" && value.device_status === "registered"
-      }); 
+    const atendentes = logados.filter(value =>
+      ramaisValidos.includes(value.exten) &&
+      value.device_status === "registered"
+    );
+
 
     // Resgata os agentes que estão pausados e de resto os que estão disponiveis, ordenado de pausado, em ligação e disponivel
     const agentes = atendentes
